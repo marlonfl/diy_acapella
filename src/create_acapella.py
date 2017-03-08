@@ -3,7 +3,7 @@ import scipy.io.wavfile as scw
 import sys
 import scipy
 
-win_length = 2048
+win_length = 4096
 overlap = 4
 
 def remove_zeros(audio):
@@ -66,8 +66,8 @@ if __name__ == "__main__":
     o_windows_r = o_vals_r[0]
     o_imags_r = o_vals_r[1]
 
-    o_windows_l = np.clip(o_windows_l - (1 * i_windows_l), 0, np.amax(o_windows_l))
-    o_windows_r = np.clip(o_windows_r - (1 * i_windows_r), 0, np.amax(o_windows_r))
+    o_windows_l = np.clip(o_windows_l - (0.95 * i_windows_l), 0, np.amax(o_windows_l))
+    o_windows_r = np.clip(o_windows_r - (0.95 * i_windows_r), 0, np.amax(o_windows_r))
 
     final_windows_l = istft(o_windows_l * scipy.exp(o_imags_l*1j), overlap)
     final_windows_r = istft(o_windows_r * scipy.exp(o_imags_r*1j), overlap)
